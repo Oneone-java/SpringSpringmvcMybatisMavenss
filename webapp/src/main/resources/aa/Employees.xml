@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ma.crud.nn.Employees">
+
+    <resultMap type="ma.crud.cc.Employee" id="userResult">
+        <id column="id" property="id"></id>
+        <result column="lastName" property="lastName"/>
+        <result column="email" property="email"/>
+        <result column="gender" property="gender"/>
+        <result column="birth" property="birth"/>
+        <result column="salary" property="salary"/>
+        <result column="headUrl" property="headUrl"/>
+
+        <association property="department" javaType="ma.crud.cc.Department" >
+            <id property="id" column="id" />
+            <result property="departmentName" column="departmentName" />
+        </association>
+    </resultMap>
+
+    <!-- 取得插入数据后的id -->
+ <!--   <insert id="save" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into employee(lastName,email,gender,birth,salary,headUrl,department)
+        values(#{lastName},#{email},#{birth},#{salary},#{headUrl},#{department})
+    </insert>
+
+    <select id="queryStudent" resultMap="userResult" > select * from employee </select>-->
+
+    <!-- 查询-所有-->
+    <select id="getUsers" resultMap="userResult" parameterType="ma.crud.cc.Page">
+        select * from `employee` as u,`department` as a
+        <where>
+            u.p_id = a.id
+        </where>
+        limit #{p},#{pageSize}
+    </select>
+
+    <!--查询总数据-->
+    <select id="getCount" resultType="int">
+        select count(*) from `employee`
+    </select>
+
+    <!--  根据id查询回显数据  -->
+    <select id="getUserById" parameterType="int" resultMap="userResult"> select * from employee where id = #{id} </select>
+
+    <!--  查询所有部门  -->
+    <!--<select id="getUsers" resultMap="userResult"> select * from employee </select>-->
+
+    <insert id="addUser" parameterType="ma.crud.cc.Employee">
+        insert into employee(lastName,email,gender,birth,salary,headUrl,p_id)values(#{lastName},#{email},#{gender},#{birth},#{salary},#{headUrl},#{department.id})
+    </insert>
+
+    <delete id="deleteUser">
+        delete from employee
+        where id = #{id}
+    </delete>
+
+    <update id="updateUser" parameterType="ma.crud.cc.Employee">
+        update employee set lastName=#{lastName},email=#{email},gender=#{gender},birth=#{birth},salary=#{salary},headUrl=#{headUrl},p_id=#{department.id} where id = #{id}
+    </update>
+
+
+</mapper>

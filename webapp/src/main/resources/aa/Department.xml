@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--数据库的映射文件-->
+<!--映射那个类就用那个  用接口和xml这里就映射接口类-->
+<mapper namespace="ma.crud.nn.Departments">
+
+    <resultMap id="de" type="ma.crud.cc.Department">
+        <id column="id" property="id"></id>
+        <result column="departmentName" property="departmentName"></result>
+    </resultMap>
+
+    <!-- 查询-所有-->
+    <select id="getDepartment" resultMap="de"> select * from department </select>
+    <!-- 根据ID查询-->
+    <select id="getById" resultMap="de" parameterType="java.lang.Integer">
+        select * from `department` where id = #{id}
+    </select>
+
+</mapper>
