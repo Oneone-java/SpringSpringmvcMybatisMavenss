@@ -16,7 +16,7 @@ public class Test {
        Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.31.193:7001/tests","root","123123Qq#");
 
         //java 直接链接集群  ?roundRobinLoadBalance=true 表示主节点挂了 会使其他节点来成为
-     //  eeee Connection connection = DriverManager.getConnection("jdbc:mysql:loadbalance://192.168.1.226:3306,192.168.1.227:3306,192.168.1.230:3306/a?roundRobinLoadBalance=true","root","123123Qq#");
+     //  ffff Connection connection = DriverManager.getConnection("jdbc:mysql:loadbalance://192.168.1.226:3306,192.168.1.227:3306,192.168.1.230:3306/a?roundRobinLoadBalance=true","root","123123Qq#");
 
         String sql =   "select * from testss";
         PreparedStatement ps = connection.prepareStatement(sql);
