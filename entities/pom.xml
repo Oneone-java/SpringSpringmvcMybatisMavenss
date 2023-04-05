@@ -7,7 +7,7 @@
     <groupId>org.example</groupId>
     <artifactId>entities</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <!--继承-->
     <parent>
         <groupId>org.example</groupId>
